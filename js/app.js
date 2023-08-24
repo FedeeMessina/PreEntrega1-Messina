@@ -1,103 +1,121 @@
-//Declaro variables como si fueran productos asi luego las uso para funciones y demas
-let nike = 45000;
-let adidas = 40000;
-let puma = 35000;
-let reebok = 30000;
-let converse = 25000;
+// DECLARO UN ARRAY AL CUAL LE VOY A IR AGREGANDO PRODUCTOS
+const arrayProductos = [];
 
-//funcion que luego voy a usar para calcular el total a pagar del cliente
-function calcularTotal(cantidad, precio) {
-    let total = cantidad * precio;
-    alert("El total de su compra es $"+total+". Gracias, espero que lo disfrute!");
+//CREO UNA FUNCION CONSTRUCTORA PARA LUEGO IR CREANDO OBJETOS DE MANERA MAS FACIL
+function Producto(marca, color, talle, precio) {
+  this.marca = marca;
+  this.color = color;
+  this.talle = talle;
+  this.precio = precio;
+}
+
+//CREO UNA FUNCTION AGREGAR PRODUCTOS QUE MEDIANTE PUSH VAYA AGREGANDO LOS ITEMS AL ARRAY DE OBJETOS
+function agregarProducto(marca, color, talle, precio) {
+  const nuevoProducto = new Producto(marca, color, talle, precio);
+  arrayProductos.push(nuevoProducto);
   }
+//LLAMO A LA FUNCION AGREGAR PRODUCTOS Y LE PASO LAS VARIABLES PARA Q ME CREE DICHOS OBJETOS
+agregarProducto("nike", "rojo", 41, 45000);
+agregarProducto("nike", "azul", 40, 45000);
+agregarProducto("nike", "azul", 41, 45000);
+agregarProducto("adidas", "blanco", 40, 40000);
+agregarProducto("adidas", "blanco", 41, 40000);
+agregarProducto("puma", "negro", 43, 35000);
+agregarProducto("reebok", "azul", 44, 30000);
+agregarProducto("converse", "rojo", 45, 25000);
 
-//Ingreso del usuario con un while para que si no completa algun campo vuelva a pedirlo
+//CON UN COSOLE.LOG VEO COMO QUEDA ESTE ARRAY DE OBJETOS
+console.log(arrayProductos);
+
+
+//CREO LA FUNCION OBTENER PRECIO PARA QUE SEGUN LA MARCA ME TRAIGA EL PRECIO SUGERIDO
+function obtenerPrecio(marca) {
+  switch (marca) {
+    case "nike":
+      return 45000;
+    case "adidas":
+      return 40000;
+    case "puma":
+      return 35000;
+    case "reebok":
+      return 30000;
+    case "converse":
+      return 25000;
+    default:
+      return 0; // Precio por defecto si la marca no coincide
+  }
+}
+
+//ACA EMPIEZA LA INTERACCION CON EL USUARIO
+//PEQUEÑA VALIDACION PARA MOSTRAR QUE SE VALIDAR UN USUARIO
+
 while (true) {
   let usuario = prompt("Ingrese su nombre de usuario").toLowerCase();
   let contrasenia = prompt("Ingrese su contraseña").toLowerCase();
 
   if (usuario !== "" && contrasenia !== "") {
     alert("Bienvenido " + usuario);
-    break; // Salir del bucle si los campos están completos
+    break;
   } else {
     alert("Error, todos los campos tienen que ser completados");
   }
 }
 
-//Una vez "ingresa" el usuario,empieza la compra.
+//LUEGO DE "INGRESAR" EMPIEZA LA "COMPRA"
+
 let decision1 = prompt("Desea comprar alguna zapatilla? Si-No").toLowerCase();
 
-if (decision1 == "si") {
+if (decision1 === "si") {
   let decision2 = prompt(
-    "Que marca de zapatilla desea? (Nike,Adidas,Puma,Reebok,Converse)"
+    "Qué marca de zapatilla desea? (Nike, Adidas, Puma, Reebok, Converse)"
   ).toLowerCase();
 
-  
-  let decisionCompra;//declaro la variable decisionCompra para luego en el caso que sea se llene con la info
-  
-  //uso un switch para usar varios "casos" asi es mas prolijo que muchos else if
-  switch (decision2) {
-    case "nike":
-      decisionCompra = prompt(
-        "El valor de las zapatillas Nike es de $" +
-          nike +
-          "¿Desea comprarlas? (Si/No)"
-      ).toLowerCase();
-      break;
-    case "adidas":
-      decisionCompra = prompt(
-        "El valor de las zapatillas Adidas es de $" +
-          adidas +
-          "¿Desea comprarlas? (Si/No)"
-      ).toLowerCase();
-      break;
-    case "puma":
-      decisionCompra = prompt(
-        "El valor de las zapatillas Puma es de $" +
-          puma +
-          "¿Desea comprarlas? (Si/No)"
-      ).toLowerCase();
-      break;
-      case "reebok":
-      decisionCompra = prompt(
-        "El valor de las zapatillas Reebok es de $" +
-          reebok +
-          "¿Desea comprarlas? (Si/No)"
-      ).toLowerCase();
-      break;
-      case "converse":
-      decisionCompra = prompt(
-        "El valor de las zapatillas Converse es de $" +
-          converse +
-          "¿Desea comprarlas? (Si/No)"
-      ).toLowerCase();
-      break;
-  }
-  //este otro if hace que segun la marca que eligio y la cantidad le devuelva el valor total llamando a la funcion que declare al principio
-  if(decisionCompra==="si"){
-    let cantidadZapas = parseInt(prompt('Que cantidad de zapatillas desea comprar? (SOLO NUMEROS)'));
-    
+  let precioSeleccionado = obtenerPrecio(decision2);
 
-    switch(decision2){
-        case "nike":
-            calcularTotal(cantidadZapas,nike)
-            break;
-          case "adidas":
-            calcularTotal(cantidadZapas,adidas)
-            break;
-          case "puma":
-            calcularTotal(cantidadZapas,puma)
-            break;
-          case "reebok":
-            calcularTotal(cantidadZapas,reebok)
-            break;
-          case "converse":
-            calcularTotal(cantidadZapas,converse)
-            break;
+//ACA SI EL PRECIO ES MAYOR A CERO HAGO UN IF EL CUAL VA A FILTRAR POR MARCA Y VA A PONER EN EL PROMPT LOS TALLES DISPONIBLES DE CADA MARCA 
+  if (precioSeleccionado > 0) {
+    let tallesDisponibles = [...new Set(arrayProductos.filter(producto => producto.marca === decision2).map(producto => producto.talle))];
+    tallesDisponibles.sort((a, b) => a - b); //ACA ACOMODO LOS TALLES EN ORDEN PARA QUE SE VEAN BIEN EN EL PROMPT
+    
+    let talleSeleccionado = prompt(
+      `Ingrese el talle deseado segun disponibilidad (${tallesDisponibles.join(", ")}):`
+    );
+
+    if (!tallesDisponibles.includes(parseInt(talleSeleccionado))) {
+      alert("Talle no válido.");
+    } else {
+      //ACA HAGO OTRO FILTER QUE SE FIJE SEGUN MARCA Y TALLE EL COLOR DISPONIBLE QUE HAY      
+      let coloresDisponibles = [...new Set(arrayProductos.filter(producto => producto.marca === decision2 && producto.talle == talleSeleccionado).map(producto => producto.color))];
+      
+      let colorSeleccionado = prompt(
+        `Ingrese el color deseado (${coloresDisponibles.join(", ")}):`
+      );
+
+      if (!coloresDisponibles.includes(colorSeleccionado.toLowerCase())) {
+        alert("Color no válido.");
+      } else {
+        //ACA USO UNA FUNCION SIMPLE QUE ME HACE LA CUENTA SEGUN PRECIO Y CANTIDAD        
+        let cantidadZapas = parseInt(prompt("Ingrese la cantidad de zapatillas deseada:"));
+        let totalCompra = precioSeleccionado * cantidadZapas;
+
+        let decisionCompra = prompt(
+          `El valor de las zapatillas ${decision2} es de $${precioSeleccionado}. Total de su compra: $${totalCompra}. ¿Desea comprarlas? (Si/No)`
+        ).toLowerCase();
+
+        if (decisionCompra === "si") {
+          function calcularTotal(cantidad, precio) {
+            let total = cantidad * precio;
+            alert("El total de su compra es $" + total + ". Gracias, espero que lo disfrute!");
+          }
+
+          calcularTotal(cantidadZapas, precioSeleccionado);
+        } else {
+          alert("Gracias! ¡Vuelva Pronto!");
         }
+      }
     }
-    else {
-        alert("Gracias! ¡Vuelva Pronto!");
+  } else {
+    alert("Marca no válida.");
   }
 } else {
   alert("Gracias! Vuelva Pronto!");
