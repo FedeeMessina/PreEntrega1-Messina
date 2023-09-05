@@ -1,3 +1,8 @@
+import jsonData from '..JSON/productos.json';
+
+// Accede a los datos como un objeto JavaScript
+console.log(jsonData.productos);
+
 // DECLARO UN ARRAY AL CUAL LE VOY A IR AGREGANDO PRODUCTOS
 const arrayProductos = [];
 

@@ -1,0 +1,53 @@
+{
+    "productos": [
+      {
+        "marca": "nike",
+        "color": "rojo",
+        "talle": 41,
+        "precio": 45000
+      },
+      {
+        "marca": "nike",
+        "color": "azul",
+        "talle": 40,
+        "precio": 45000
+      },
+      {
+        "marca": "nike",
+        "color": "azul",
+        "talle": 41,
+        "precio": 45000
+      },
+      {
+        "marca": "adidas",
+        "color": "blanco",
+        "talle": 40,
+        "precio": 40000
+      },
+      {
+        "marca": "adidas",
+        "color": "blanco",
+        "talle": 41,
+        "precio": 40000
+      },
+      {
+        "marca": "puma",
+        "color": "negro",
+        "talle": 43,
+        "precio": 35000
+      },
+      {
+        "marca": "reebok",
+        "color": "azul",
+        "talle": 44,
+        "precio": 30000
+      },
+      {
+        "marca": "converse",
+        "color": "rojo",
+        "talle": 45,
+        "precio": 25000
+      }
+    ]
+  }
+  
