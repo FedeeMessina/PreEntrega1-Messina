@@ -1,7 +1,18 @@
-import jsonData from '..JSON/productos.json';
+fetch('../JSON/productos.json') // Reemplaza 'URL_DEL_JSON.json' con la URL real de tu JSON si está alojado en un servidor remoto
+  .then(response => response.json())
+  .then(data => {
+    // Trabajar con los datos JSON
+    console.log(data.productos); // Esto mostrará el JSON en la consola
+    
+    // Ejemplo: Iterar a través de los productos
+    data.productos.forEach(producto => {
+      console.log(`Marca: ${producto.marca}, Color: ${producto.color}, Talle: ${producto.talle}, Precio: ${producto.precio}`);
+    });
+  })
+  .catch(error => {
+    console.error('Error al cargar el JSON:', error);
+  });
 
-// Accede a los datos como un objeto JavaScript
-console.log(jsonData.productos);
 
 // DECLARO UN ARRAY AL CUAL LE VOY A IR AGREGANDO PRODUCTOS
 const arrayProductos = [];
@@ -31,6 +42,15 @@ agregarProducto("converse", "rojo", 45, 25000);
 
 //CON UN COSOLE.LOG VEO COMO QUEDA ESTE ARRAY DE OBJETOS
 console.log(arrayProductos);
+
+const usuario = document.getElementById("inputUsuario").value
+const contrasenia = document.getElementById("inputPassword")
+
+// let usuarioValor = usuario.value; 
+
+console.log(usuario);
+console.log(contrasenia);
+
 
 
 //CREO LA FUNCION OBTENER PRECIO PARA QUE SEGUN LA MARCA ME TRAIGA EL PRECIO SUGERIDO

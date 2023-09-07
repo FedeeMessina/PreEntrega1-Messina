@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
-    <title>Carrito de compras</title>
+    <title>Inicio</title>
 </head>
 <body>
     <h1>Carrito de Compras</h1>
+    <div class="container">
+      <h1 class="mt-5">Lista de Productos</h1>
 
-    <!-- Agrega un contenedor para los productos -->
-    <div id="productos-container"></div>
+      <!-- Agregar un mensaje si hay productos en el carrito -->
+      <div class="alert alert-success" id="mensajeCarritoVacio" style="display: none;">
+          ¡Eyy! Tienes productos en tu carrito.
+      </div>
+
+      <ul class="list-group mt-4" id="listaProductos">
+          <!-- Aquí se agregarán los productos dinámicamente -->
+      </ul>
 
     
-    <script src="/js/app.js"></script>
+    <script src="/js/app.js" async></script>
 </body>
 </html>
